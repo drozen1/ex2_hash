@@ -28,7 +28,7 @@ namespace AVL {
         StatusType addToTable (int member_id);
         StatusType removeFromTable (int member_id);
         StatusType reHash();
-        StatusType retrieve_member(int member_id);
+        Link_Node<T>* retrieve_member(int member_id);
         StatusType multiply_size();
         StatusType divide_size();
         int hashFunction(int member_id);
@@ -126,8 +126,9 @@ namespace AVL {
 
     template<class T>
     StatusType HashTable<T>::addToTable(int member_id) {
-        ///check that member_id doesnt exists
-
+        if(retrieve_member(member_id)!= NULL){
+            return FAILURE; //a node with the given ID was found
+        }
         Link_Node<T>* node_to_add= new Link_Node<T>(member_id);
         setNumOfMembers(num_of_members+1);
         reHash();
@@ -142,12 +143,27 @@ namespace AVL {
     }
 
     template<class T>
-    StatusType HashTable<T>::retrieve_member(int member_id) {
-        return INVALID_INPUT;
-
-
+    Link_Node<T>* HashTable<T>::retrieve_member(int member_id) {
+        int indexToSearchIn = hashFunction(member_id);
+        Link_Node<T> *wantedNode = table[indexToSearchIn]->searchForNode(member_id);
+        return wantedNode;
     }
 
+    template<class T>
+    StatusType HashTable<T>::removeFromTable(int member_id) {
+        Link_Node<T>* NodeToRemove = retrieve_member(member_id);
+        if (!NodeToRemove){
+            return FAILURE;
+        }
+        else{
+            int indexOfFittingList = hashFunction(member_id);
+            table[indexOfFittingList]->removeNodeFromList(NodeToRemove);
+            setNumOfMembers(num_of_members-1);
+            reHash();
+            return SUCCESS;
+        }
+
+    }
 
 }
 

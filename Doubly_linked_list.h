@@ -17,6 +17,7 @@ namespace AVL {
         Link_Node<T>* Last;
     public:
         Doubly_Linked_List();
+        Link_Node<T> *searchForNode(int) const ;
 
         Doubly_Linked_List(Link_Node<T> *head);
 
@@ -156,6 +157,17 @@ namespace AVL {
 
 
     }
+
+    template<class T> //returns NULL if a node with the wanted ID wasn't found
+    Link_Node<T> *Doubly_Linked_List<T>::searchForNode(int ID) const {
+        for(Link_Node<T>* curr = getHead(); curr !=NULL; curr = curr->getNext()){
+            if (curr->getNum() == ID){
+                return curr;
+            }
+        }
+        return NULL;
+    }
+
 
 }
 
