@@ -6,7 +6,7 @@
 #include "hashTable.h"
 int main() {
 
-    AVL::HashTable<int> hashTable;
+    AVL::HashTable<int> hashTable(2);
 
     std::cout << std::endl;
 }
