@@ -17,10 +17,8 @@ namespace AVL {
     template<class T>
     class HashTable{
     private:
+
         Doubly_Linked_List<T>** table;
-
-
-    private:
         int size_of_array;
         int num_of_members;
         const int alpha_min=2;
@@ -33,11 +31,12 @@ namespace AVL {
         StatusType retrieve_member(int member_id);
         StatusType multiply_size();
         StatusType divide_size();
+        int hashFunction(int member_id);
 
 
     public:
         HashTable(int sizeOfArray) : size_of_array(sizeOfArray),num_of_members(0) {
-            table= new Doubly_Linked_List<T>*[sizeOfArray];
+            table= new Doubly_Linked_List<T>*[size_of_array];
             for (int i = 0; i <sizeOfArray ; ++i) {
                 table[i]= nullptr;
             }
@@ -69,18 +68,75 @@ namespace AVL {
 
     template<class T>
     StatusType HashTable<T>::reHash() {
-
         double alpha= num_of_members/size_of_array;
         if (alpha>alpha_max){
-
+            multiply_size();
         }
         else{
             if (alpha<alpha_min){
-
+                divide_size();
             }
         }
-        return INVALID_INPUT;
+        return SUCCESS;
     }
+
+    template<class T>
+    StatusType HashTable<T>::multiply_size() {
+        int place;
+        this->setSizeOfArray(size_of_array*2);
+        Doubly_Linked_List<T>** new_table= new Doubly_Linked_List<T>*[size_of_array];
+        for (int i = 0; i < size_of_array/2 ; ++i) {
+            Doubly_Linked_List<T>* current_list = table[i];
+            while (current_list->getHead()!=NULL) {
+                Link_Node<T>* node_to_copy=current_list->getHead();
+                current_list->setHead(current_list->getHead()->getNext());
+                place = hashFunction(node_to_copy->getNum());
+                new_table[place]->setNewNodeAfterNode(NULL, node_to_copy);
+            }
+        }
+        delete[] table;
+        table=new_table;
+        return SUCCESS;
+    }
+
+    template<class T>
+    StatusType HashTable<T>::divide_size() {
+        int place;
+        this->setSizeOfArray(size_of_array/2);
+        Doubly_Linked_List<T>** new_table= new Doubly_Linked_List<T>*[size_of_array];
+        for (int i = 0; i < size_of_array*2 ; ++i) {
+            Doubly_Linked_List<T>* current_list = table[i];
+            while (current_list->getHead()!=NULL) {
+                Link_Node<T>* node_to_copy=current_list->getHead();
+                current_list->setHead(current_list->getHead()->getNext());
+                place = hashFunction(node_to_copy->getNum());
+                new_table[place]->setNewNodeAfterNode(NULL, node_to_copy);
+            }
+        }
+        delete[] table;
+        table=new_table;
+        return SUCCESS;
+    }
+
+    template<class T>
+    StatusType HashTable<T>::addToTable(int member_id) {
+        ///check that member_id doesnt exists
+
+        Link_Node<T>* node_to_add= new Link_Node<T>(member_id);
+        setNumOfMembers(num_of_members+1);
+        reHash();
+        int place = hashFunction(member_id);
+        table[place]->setNewNodeAfterNode(NULL,node_to_add);
+        return SUCCESS;
+    }
+
+    template<class T>
+    int HashTable<T>::hashFunction(int member_id) {
+        return (member_id % (size_of_array));
+    }
+
+
+}
 
 
 }
