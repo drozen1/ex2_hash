@@ -3,8 +3,10 @@
 //
 
 #include <iostream>
-
+#include "hashTable.h"
 int main() {
+
+    AVL::HashTable<int> hashTable;
 
     std::cout << std::endl;
 }

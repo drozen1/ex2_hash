@@ -86,14 +86,13 @@ namespace AVL {
      * @param newNode- the address of the new node..
      */
     template<class T>
-    void Doubly_Linked_List<T>::setNewNodeAfterNode(Link_Node<T> *push_after_node,Link_Node<T>* newNode) { /////////////DEBUG NEEDED!!!!!
+    void Doubly_Linked_List<T>::setNewNodeAfterNode(Link_Node<T> *push_after_node,Link_Node<T>* newNode) {
         ///treat head is newNode
         if (push_after_node==NULL){
             if(this->getHead()!=NULL) {
                 newNode->setNext(this->getHead());
                 this->getHead()->setPrev(newNode);
                 this->getHead()->setPrev(newNode);
-                //this->getHead()->getNext()->setPrev(newNode);
             }
             else{
                 setLast(newNode);
