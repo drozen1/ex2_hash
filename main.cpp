@@ -8,8 +8,25 @@
 #include "MusicManager.h"
 int main() {
 
+    ArtistStreamTreeInfo* y1= new ArtistStreamTreeInfo(1);
+    ArtistStreamTreeInfo* y2= new ArtistStreamTreeInfo(2);
+    ArtistStreamTreeInfo* y3= new ArtistStreamTreeInfo(3);
+    y1->incrementNumberOfStreams(3);
+    y3->incrementNumberOfStreams(2);
 
-   ArtistRegularTreeInfo* x1= new ArtistRegularTreeInfo(1);
+    AVL::AVL_tree_node<ArtistStreamTreeInfo> nodeY1= AVL::AVL_tree_node<ArtistStreamTreeInfo>(y1);
+    AVL::AVL_tree_node<ArtistStreamTreeInfo> nodeY2= AVL::AVL_tree_node<ArtistStreamTreeInfo>(y2);
+    AVL::AVL_tree_node<ArtistStreamTreeInfo> nodeY3= AVL::AVL_tree_node<ArtistStreamTreeInfo>(y3);
+
+    AVL::AVL_tree<ArtistStreamTreeInfo> example_tree_streams = AVL::AVL_tree<ArtistStreamTreeInfo>();
+
+    example_tree_streams.insert(nodeY1);
+    example_tree_streams.insert(nodeY2);
+    example_tree_streams.insert(nodeY3);
+
+
+
+    ArtistRegularTreeInfo* x1= new ArtistRegularTreeInfo(1);
     ArtistRegularTreeInfo* x2= new ArtistRegularTreeInfo(2);
     ArtistRegularTreeInfo* x3= new ArtistRegularTreeInfo(3);
     ArtistRegularTreeInfo* x4= new ArtistRegularTreeInfo(4);

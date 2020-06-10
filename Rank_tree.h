@@ -127,16 +127,16 @@ namespace AVL {
     AVL_tree_node<Element> *AVL_tree<Element>::find_node(Element* key) {
         AVL_tree_node<Element> *curr = root;
         while (curr != nullptr && (curr->getLeftSon() != nullptr or curr->getRightSon() != nullptr)) {
-            if (curr->getDataKey() == key)
+            if (*(curr->getDataKey()) == *key)
                 return curr;
 
-            if (curr->getDataKey() > key) {
+            if ( *(curr->getDataKey()) > *key) {
                 curr = curr->getLeftSon();
             } else {
                 curr = curr->getRightSon();
             }
         }
-        if (curr != NULL && curr->getDataKey() == key) {
+        if (curr != NULL && *(curr->getDataKey()) == *key) {
             return curr;
         }
         return nullptr;
@@ -150,7 +150,7 @@ namespace AVL {
             setMinimum(&node_toadd);
         }
         else{
-            if (minimum!=NULL && key < minimum->getDataKey()){
+            if (minimum!=NULL && *key < *(minimum->getDataKey())){
                 setMinimum(&node_toadd);
             }
         }
@@ -165,7 +165,7 @@ namespace AVL {
             return SUCCESS;
         }
         while (curr != nullptr) {
-            if (curr->getDataKey() > key) {
+            if (*(curr->getDataKey()) > *key) {
                 last = curr;
                 curr = curr->getLeftSon();
             } else {
@@ -173,7 +173,7 @@ namespace AVL {
                 curr = curr->getRightSon();
             }
         }
-        if (key > last->getDataKey()) {
+        if (*key > *(last->getDataKey())) {
             last->setRightSon(&node_toadd);
         } else {
             last->setLeftSon(&node_toadd);
