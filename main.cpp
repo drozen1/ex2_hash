@@ -11,7 +11,7 @@ int main() {
     ArtistStreamTreeInfo* y1= new ArtistStreamTreeInfo(1);
     ArtistStreamTreeInfo* y2= new ArtistStreamTreeInfo(2);
     ArtistStreamTreeInfo* y3= new ArtistStreamTreeInfo(3);
-    y1->incrementNumberOfStreams(3);
+    y1->incrementNumberOfStreams(4);
     y3->incrementNumberOfStreams(2);
 
     AVL::AVL_tree_node<ArtistStreamTreeInfo> nodeY1= AVL::AVL_tree_node<ArtistStreamTreeInfo>(y1);
