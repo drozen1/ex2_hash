@@ -92,6 +92,8 @@ namespace AVL {
 
         AVL_tree_node<Element>* searchTreeRemoval(AVL_tree_node<Element> &node_to_remove, int& foundGivenNode);
 
+        AVL_tree_node<Element>* retrieveMax();
+
     private:
         AVL_tree_node<Element> *root;
         AVL_tree_node<Element>* minimum;
@@ -561,7 +563,7 @@ namespace AVL {
             shouldResetRoot = true;
         }
         AVL_tree_node <Element> *followingVerInorder = p->retreiveFollowingVertexInorder();
-        if (followingVerInorder->getKey() == p->getRightSon()->getKey()) {
+        if (*(followingVerInorder->getDataKey()) == *(p->getRightSon()->getDataKey())) {
             AVL_tree_node <Element> *leftSonOfp = p->getLeftSon();
             followingVerInorder->setLeftSon(leftSonOfp);
             leftSonOfp->setParent(followingVerInorder);
@@ -582,7 +584,7 @@ namespace AVL {
         }
         AVL_tree_node <Element> *parentOfFollowingVer = followingVerInorder->getParent();
         if (followingVerInorder->isLeaf()) { //handle the case the following vertex is a leaf
-            if (parentOfFollowingVer->getKey() != p->getKey()) {
+            if (*(parentOfFollowingVer->getDataKey()) != *(p->getDataKey())) {
                 if (parentOfFollowingVer->getTypeOfSon(followingVerInorder) == RIGHT) {
                     parentOfFollowingVer->setRightSon(NULL);
                 } else {
@@ -595,11 +597,11 @@ namespace AVL {
             parentOfFollowingVer->setLeftSon(rightSonOfFollowingVer);
             rightSonOfFollowingVer->setParent(parentOfFollowingVer);
         }
-        if (p->getLeftSon()->getKey() != followingVerInorder->getKey()) {
+        if ((*p->getLeftSon()->getDataKey()) != (*followingVerInorder->getDataKey())) {
             followingVerInorder->setLeftSon(p->getLeftSon());
             p->getLeftSon()->setParent(followingVerInorder);
         }
-        if (p->getRightSon()->getKey() != followingVerInorder->getKey()) {
+        if ((*p->getRightSon()->getDataKey()) != (*followingVerInorder->getDataKey())) {
             followingVerInorder->setRightSon(p->getRightSon());
             p->getRightSon()->setParent(followingVerInorder);
         }
@@ -733,6 +735,17 @@ namespace AVL {
         return minimum;
     }
 
+    template<class Element>
+    AVL_tree_node<Element> *AVL_tree<Element>::retrieveMax() {
+        if (this->root==NULL){
+            return NULL;
+        }
+        AVL_tree_node<Element> * cur=this->root;
+        while(cur->getRightSon()!=NULL){
+            cur=cur->getRightSon();
+        }
+        return cur;
+    }
 
 
 }
