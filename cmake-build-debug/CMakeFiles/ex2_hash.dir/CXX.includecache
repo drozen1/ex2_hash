@@ -6,14 +6,6 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/dor/CLionProjects/ex2_hash/AVL_tree.h
-AVL_tree_node.h
-C:/Users/dor/CLionProjects/ex2_hash/AVL_tree_node.h
-ostream
--
-math.h
--
-
 C:/Users/dor/CLionProjects/ex2_hash/AVL_tree_node.h
 ostream
 -
@@ -32,19 +24,37 @@ C:/Users/dor/CLionProjects/ex2_hash/Link_node.h
 ostream
 -
 
+C:/Users/dor/CLionProjects/ex2_hash/MusicManager.h
+ostream
+-
+hashTable.h
 C:/Users/dor/CLionProjects/ex2_hash/hashTable.h
-AVL_tree.h
-C:/Users/dor/CLionProjects/ex2_hash/AVL_tree.h
+
+C:/Users/dor/CLionProjects/ex2_hash/Rank_tree.h
+AVL_tree_node.h
+C:/Users/dor/CLionProjects/ex2_hash/AVL_tree_node.h
+ostream
+-
+math.h
+-
+
+C:/Users/dor/CLionProjects/ex2_hash/hashTable.h
+Rank_tree.h
+C:/Users/dor/CLionProjects/ex2_hash/Rank_tree.h
 AVL_types.h
 C:/Users/dor/CLionProjects/ex2_hash/AVL_types.h
 Doubly_linked_list.h
 C:/Users/dor/CLionProjects/ex2_hash/Doubly_linked_list.h
 math.h
-C:/Users/dor/CLionProjects/ex2_hash/math.h
+-
 
 C:/Users/dor/CLionProjects/ex2_hash/main.cpp
 iostream
 -
 hashTable.h
 C:/Users/dor/CLionProjects/ex2_hash/hashTable.h
+AVL_tree_node.h
+C:/Users/dor/CLionProjects/ex2_hash/AVL_tree_node.h
+MusicManager.h
+C:/Users/dor/CLionProjects/ex2_hash/MusicManager.h
 

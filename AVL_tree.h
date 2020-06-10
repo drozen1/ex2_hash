@@ -86,8 +86,9 @@ namespace AVL {
         AVL_tree_node<Element>* searchTreeRemoval(AVL_tree_node<Element> &node_to_remove, int& foundGivenNode);
 
     private:
-        AVL_tree_node<Element> *root;
+        AVL_tree_node<Element>* root;
         AVL_tree_node<Element>* minimum;
+
     public:
         AVL_tree_node<Element> *getMinimum() ;
 

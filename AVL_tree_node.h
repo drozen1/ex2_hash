@@ -15,15 +15,26 @@ namespace AVL {
     using namespace AVLUtils;
     template<class Element>
     class AVL_tree_node {
+
     private:
-        Element* element;
+        Element* data_key;
+    public:
+        int getNumOfSons() const;
+
+        void setNumOfSons(int numOfSons);
+
+    private:
         AVL_tree_node *parent;
         AVL_tree_node *right_son;
         AVL_tree_node *left_son;
         int height;
-        int key;
+        int num_of_sons;
 
     public:
+        Element *getDataKey() const;
+
+        void setDataKey(Element *dataKey);
+
         AVL_tree_node* retreiveFollowingVertexInorder(){
             AVL_tree_node* temp =  this->getRightSon();
             while(temp->getLeftSon()!= NULL){
@@ -36,7 +47,6 @@ namespace AVL {
 
         void updateHeight();
 
-        Element *getElement() const;
 
         AVL_tree_node *getParent() const {
             return parent;
@@ -71,24 +81,21 @@ namespace AVL {
             AVL_tree_node::height = height;
         }
 
-        AVL_tree_node(Element* e, int receivedKey) {
-            element = e;
+        AVL_tree_node(Element* e) {
+            data_key = e;
             parent= (nullptr);
             right_son = (nullptr);
             left_son = (nullptr);
-            height =(0);
-            key = (receivedKey);
-
+            height = 0;
+            num_of_sons = 0;
         }
-
-        AVL_tree_node(int key);
 
 
 
         virtual ~AVL_tree_node() {
-            if(element!= NULL){
-                delete(element);
-                setElement(NULL);
+            if(data_key!= NULL){
+                delete(data_key);
+                setDataKey(NULL);
             }
         }
 
@@ -96,9 +103,6 @@ namespace AVL {
         AVL_tree_node() {
         }
 
-        int getKey() const {
-            return key;
-        }
 
         bool isLeaf() {
             return (getRightSon() == NULL && getLeftSon() == NULL);
@@ -111,19 +115,18 @@ namespace AVL {
 
 
         bool operator==(const AVL_tree_node &rhs) const {
-            return key == rhs.key;
+            return data_key == rhs.data_key;
         }
 
 //        friend std::ostream &operator<<(std::ostream &os, const AVL_tree_node &node);
 
         void Print_node();
 
-    void setElement(Element *element);
-
-    void setKey(int key);
 
 
-};
+
+
+    };
 
 /**
  * clc BF = left_height-right_height
@@ -169,7 +172,7 @@ namespace AVL {
 
     template<class Element>
     void AVL_tree_node<Element>::Print_node() {
-        std::cout << "Our node is key: " << key<< " ";
+        std::cout << "Our node is key: " << data_key<< " ";
         std::cout << "BF: " << calcBalnceFactor() << " ";
         std::cout << "Height: " << getHeight();
         std::cout<<std::endl;
@@ -195,27 +198,13 @@ namespace AVL {
      */
     template<class Element>
     TypeOfSon AVL_tree_node<Element>::getTypeOfSon(AVL_tree_node<Element> *Son) {
-        if(this->getLeftSon()!=NULL && this->getLeftSon()->getKey()==Son->getKey())
-          return LEFT;
+        if(this->getLeftSon()!=NULL && this->getLeftSon()->getDataKey()==Son->getDataKey())
+            return LEFT;
         return RIGHT;
     }
 
-    template<class Element>
-    AVL_tree_node<Element>::AVL_tree_node(int key):element(NULL), parent(nullptr), right_son(nullptr), left_son(nullptr),key(key) {}
 
-    template<class Element>
-    Element *AVL_tree_node<Element>::getElement() const {
-        return element;
-    }
-    template<class Element>
-    void AVL_tree_node<Element>::setKey(int key) {
-        AVL_tree_node::key = key;
-    }
 
-    template<class Element>
-    void AVL_tree_node<Element>::setElement(Element *element) {
-        AVL_tree_node::element = element;
-    }
 
     template<class Element>
     void AVL_tree_node<Element>::delete_redudants_nodes(int* num_of_nodes_to_delete) {
@@ -224,8 +213,7 @@ namespace AVL {
         }
         AVL_tree_node<Element>*right= this->getRightSon();
         right->delete_redudants_nodes(num_of_nodes_to_delete);
-                //->delete_redudants_nodes(num_of_nodes_to_delete);
-        ///delete if it is leaf
+        ///delete if it is a leaf
         if (isLeaf()){
             *num_of_nodes_to_delete=*num_of_nodes_to_delete-1;
             if(this->getParent()->getRightSon()!=NULL){
@@ -243,31 +231,25 @@ namespace AVL {
         this->getLeftSon()->delete_redudants_nodes(num_of_nodes_to_delete);
     }
 
+    template<class Element>
+    Element *AVL_tree_node<Element>::getDataKey() const {
+        return data_key;
+    }
 
+    template<class Element>
+    void AVL_tree_node<Element>::setDataKey(Element *dataKey) {
+        data_key = dataKey;
+    }
 
+    template<class Element>
+    int AVL_tree_node<Element>::getNumOfSons() const {
+        return num_of_sons;
+    }
 
-
-//    template<class Element>
-//    TypeOfSon AVL_tree_node<Element>::getTypeOfSon() {
-//        if(this->getRightSon()!=NULL) {
-//            return RIGHT_SON;
-//        }
-//        if(this->getLeftSon()!=NULL) {
-//            return LEFT_SON;
-//        }
-//        return LEFT_SON;
-//    }
-
-
-
-
-
-
-//    template<class Element>
-//    std::ostream& AVL_tree_node<Element>:: operator<<(std::ostream &os, const AVL_tree_node <Element> &node) {
-//        os << "height: " << node.getHeight() << " key: " << node.getKey();
-//        return os;
-//    }
+    template<class Element>
+    void AVL_tree_node<Element>::setNumOfSons(int numOfSons) {
+        num_of_sons = numOfSons;
+    }
 
 
 }

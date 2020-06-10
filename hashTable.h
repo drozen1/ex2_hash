@@ -5,10 +5,10 @@
 #ifndef EX2_HASH_HASHTABLE_H
 #define EX2_HASH_HASHTABLE_H
 
-#include "AVL_tree.h"
+#include "Rank_tree.h"
 #include "AVL_types.h"
 #include "Doubly_linked_list.h"
-#include "math.h"
+#include <math.h>
 
 namespace AVL {
 
