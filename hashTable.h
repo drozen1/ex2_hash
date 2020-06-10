@@ -43,7 +43,10 @@ namespace AVL {
         }
 
         virtual ~HashTable() {
-
+            for (int i = 0; i <size_of_array ; ++i) {
+                delete table[i];
+            }
+            delete[] table;
         }
 
         int getSizeOfArray() const {
@@ -110,6 +113,9 @@ namespace AVL {
         int place;
         this->setSizeOfArray(size_of_array/2);
         Doubly_Linked_List<T>** new_table= new Doubly_Linked_List<T>*[size_of_array];
+        for (int i = 0; i <size_of_array ; ++i) {
+            new_table[i]= new Doubly_Linked_List<T>();
+        }
         for (int i = 0; i < size_of_array*2 ; ++i) {
             Doubly_Linked_List<T>* current_list = table[i];
             while (current_list->getHead()!=NULL) {
@@ -129,7 +135,7 @@ namespace AVL {
         if(retrieve_member(member_id)!= NULL){
             return FAILURE; //a node with the given ID was found
         }
-        Link_Node<T>* node_to_add= new Link_Node<T>(member_id);
+        Link_Node<T>* node_to_add= new Link_Node<T>(member_id);  ///insert memory check
         setNumOfMembers(num_of_members+1);
         reHash();
         int place = hashFunction(member_id);

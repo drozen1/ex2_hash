@@ -97,8 +97,10 @@ namespace AVL {
             }
             else{
                 setLast(newNode);
+                newNode->setNext(NULL);                                ////////////////ADD THIS ONE ??
             }
             this->setHead(newNode);
+            newNode->setPrev(NULL);                                ////////////////ADD THIS ONE ??
             return;
 
         }
@@ -107,6 +109,7 @@ namespace AVL {
             push_after_node->setNext(newNode);
             setLast(newNode);
             newNode->setPrev(push_after_node);
+            newNode->setNext(NULL);                                ////////////////ADD THIS ONE ??
             return;
         }
         ///treat middle case
