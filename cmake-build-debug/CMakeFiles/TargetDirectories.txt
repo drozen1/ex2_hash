@@ -1,0 +1,3 @@
+C:/Users/dor/CLionProjects/ex2_hash/cmake-build-debug/CMakeFiles/ex2_hash.dir
+C:/Users/dor/CLionProjects/ex2_hash/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/dor/CLionProjects/ex2_hash/cmake-build-debug/CMakeFiles/rebuild_cache.dir
